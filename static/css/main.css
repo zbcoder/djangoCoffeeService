@@ -1,0 +1,13 @@
+.btn-coffee{
+    background-color: #A67B5B;
+    color: #e1e1e1;
+    margin-top: 10px;
+    transition: all .5s ease;
+    display: block;
+}
+
+.btn-coffee:hover{
+    background-color: #301A0B;
+    opacity: .8;
+    color: #f9f9f9;
+}

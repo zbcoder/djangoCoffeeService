@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Авторизация
+{% endblock %}
+
+{% block content %}
+<div class="container" style="width: 50%; margin-top:3%;">
+    {% if user.is_authenticated %}
+        <small class="form-text muted">Вы уже авторизованы в системе вы можете перейти на главную страницу {link}</small>
+        </div>
+    {% else %}
+        <h5>Авторизация в кофейне</h5>
+        <form method="post">
+            {% csrf_token %}
+            <label for="username" class="form-label">{{form.username.label_tag}}</label>
+            <input type="text" id="username" name="{{form.username.name}}" class="form-control">
+            <small class="form-text muted">{{form.username.help_text}}</small>
+
+            <label for="password" class="form-label"></label>
+            <input type="password" name="{{form.password.name}}" class="form-control">
+            <small class="form-text muted">{{form.password.help_text}}</small>
+            <p class="form-text danger">Если вы не зарегистрированы в системе, вы можете сделать это <a href="{% url 'register' %}" class="link-secondary">здесь</a></small>
+            {% if form.errors %}
+                <p class="form-text muted" style="display:block; color: crimson;">Логин или пароль введены неправильно, попробуйте еще раз</small>
+            {% endif %}
+            <button class="btn btn-coffee">Авторизоваться</button>
+        </form>
+    {% endif %}
+</div>
+
+{% endblock %}

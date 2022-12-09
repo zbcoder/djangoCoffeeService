@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Регистрация
+{% endblock %}
+
+{% block content %}
+<div class="container" style="width: 50%; margin-top: 2%;">
+    <h4>Пожалуйста заполните поля ниже, чтобы зарегистрироваться в кофейне</h2>
+        <form method="post" class="form-register">
+            {% csrf_token %}
+            {% if messages %}
+                {% for mess in messages %}
+                <div class="alert alert-success">{{ mess }}</div>
+                {% endfor %}
+            {% endif %}   
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <small class="form-text muted" style="color: crimson">{{ error }}</small>
+                {% endfor %}
+            {% endif %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in form %}
+                <label class="form-label" style="display: block;">{{field.label_tag}}</label>
+                <input type="text" name="{{field.name}}" class="form-control">
+                <small class="form-text muted" style="color:crimson;">{{ field.errors.as_ul }}</small>
+                <small class="form-text muted">{{field.help_text}}</small>
+            {% endfor %}
+            <button class="btn btn-coffee" type="submit" style="display: block;">Зарегистрироваться</button>
+        </form>
+        <small class="text-form muted">Если вы уже зарегистрированы в системе, вы можете <a href="{% url 'login' %}" class="link-secondary">Войти</a></small>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}
